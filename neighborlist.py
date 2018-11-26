@@ -15,11 +15,12 @@ import numpy as np
 import sys
 
 
-def neighborlist(ai,sigma,fin):
-   data = np.loadtxt(fin,skiprows=9)
+def neighborlist(ai,sigma,fin): #ai=atom index; sigma = cutoff fin=name of input file(mostly dump file of lammps)
+   data = np.loadtxt(fin,skiprows=9) # skiprow need to be changed according to the file type
    a = data[ai-1][0:5]
    shift = np.subtract(a[2:5],[0,0,0])
    cor_list = np.subtract(data[:,2:5],shift)
+   #!!!this script is designed in the scale coordinates, if real coordinates, first convert to scale case.!!!#
    cor_list[cor_list<-0.5] = cor_list[cor_list<-0.5]+1
    cor_list[cor_list>0.5] = cor_list[cor_list>0.5]-1
    distance=np.sqrt(np.diagonal(np.dot(cor_list,np.transpose(cor_list))))
@@ -30,4 +31,4 @@ def neighborlist(ai,sigma,fin):
    return output
 
 fin = sys.argv[1]
-print(neighborlist(2,1,fin))
+print(neighborlist(2,1,fin)) # this will print the neighbor list of 2nd atom with the cutoff = 1\sigma
