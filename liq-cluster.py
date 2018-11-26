@@ -58,7 +58,7 @@ def getLx(fin): #Lx is needed to convert the coordinates of cluster from scale f
 
 #fin = sys.argv[1]
 fin = 'all.6996000.atom'
-n = 16
+n = 16 # a parameter which means the number of neighbors. Change it according to the coordination number analysis.
 Lx, na = getLx(fin)
 fout1 = open('cluster-Al.xyz','a+')#these two output file is a collection of xyz format data, which is centered by Al and B atoms, respectively
 fout2 = open('cluster-B.xyz','a+')
